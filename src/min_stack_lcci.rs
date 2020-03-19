@@ -74,18 +74,18 @@ mod tests {
     #[test]
     fn case_1() {
 
-        let minStack = MinStack::new();
-        minStack.push(-2);
-        minStack.push(0);
-        minStack.push(-3);
-        let ret_1 = minStack.get_min();
+        let min_stack = MinStack::new();
+        min_stack.push(-2);
+        min_stack.push(0);
+        min_stack.push(-3);
+        let ret_1 = min_stack.get_min();
         assert_eq!(-3, ret_1);
 
-        minStack.pop();
-        let ret_2 = minStack.top();
+        min_stack.pop();
+        let ret_2 = min_stack.top();
         assert_eq!(0, ret_2);
 
-        let ret_3 = minStack.get_min();
+        let ret_3 = min_stack.get_min();
         assert_eq!(-2, ret_3);
 
     }
