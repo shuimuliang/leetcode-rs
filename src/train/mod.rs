@@ -6,3 +6,4 @@ mod best_time_to_buy_and_sell_stock;
 mod longest_increasing_subsequence;
 mod move_zeros;
 mod plus_one;
+mod remove_duplicates_from_sorted_array;
