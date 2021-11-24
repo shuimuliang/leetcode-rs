@@ -9,3 +9,4 @@ mod plus_one;
 mod remove_duplicates_from_sorted_array;
 mod min_stack;
 mod valid_parentheses;
+mod sliding_window_maximum;
