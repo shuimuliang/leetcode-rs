@@ -2,8 +2,9 @@
 name = "leetcode-rs"
 version = "0.1.0"
 authors = ["shuimuliang@gmail.com <shuimuliang@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+borsh = "0.9.1"
