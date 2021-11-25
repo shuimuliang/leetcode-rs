@@ -1,5 +1,6 @@
 use std::collections::HashSet;
 
+#[allow(dead_code)]
 pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
     let mut s = HashSet::new();
     nums.retain(|e| s.insert(*e));

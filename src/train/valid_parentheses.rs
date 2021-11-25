@@ -2,6 +2,7 @@
 
 use std::collections::HashMap;
 
+#[allow(dead_code)]
 pub fn is_valid(s: String) -> bool {
     let symbol_tuples: Vec<(char, char)> = vec![('(', ')'), ('[', ']'), ('{', '}')];
     let symbol_map: HashMap<char, char> = symbol_tuples.into_iter().collect();

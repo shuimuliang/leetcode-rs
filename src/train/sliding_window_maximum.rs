@@ -1,5 +1,6 @@
+#[allow(dead_code)]
 pub fn max_sliding_window(nums: Vec<i32>, k: i32) -> Vec<i32> {
-     nums.windows(k as usize).map(|window| *window.iter().max().unwrap()  ).collect()
+    nums.windows(k as usize).map(|window| *window.iter().max().unwrap()).collect()
 }
 
 #[cfg(test)]
@@ -12,9 +13,5 @@ mod tests {
         let k = 3;
         let result = max_sliding_window(nums, k);
         assert_eq!(vec![3, 3, 5, 5, 6, 7], result);
-    }
-
-    fn test_case_2() {
-
     }
 }

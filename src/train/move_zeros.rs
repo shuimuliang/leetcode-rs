@@ -1,5 +1,6 @@
 /// https://leetcode-cn.com/problems/move-zeroes/
 
+#[allow(dead_code)]
 pub fn move_zeroes(nums: &mut Vec<i32>) {
     // 将第i个非0元素，搬到i，剩余的填充0
     let mut _non_zero_count = 0;

@@ -1,5 +1,6 @@
 // https://leetcode-cn.com/problems/longest-increasing-subsequence/
 
+#[allow(dead_code)]
 pub fn length_of_lis(nums: Vec<i32>) -> i32 {
     let mut b_array: Vec<i32> = Vec::with_capacity(nums.len());
 

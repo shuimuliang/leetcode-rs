@@ -2,7 +2,8 @@
 
 use std::cell::RefCell;
 
-struct MinStack {
+#[allow(dead_code)]
+pub struct MinStack {
     sim_stack: RefCell<Vec<i32>>,
     min_stack: RefCell<Vec<i32>>,
 }
@@ -11,6 +12,7 @@ struct MinStack {
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
  */
+#[allow(dead_code)]
 impl MinStack {
 
     /** initialize your data structure here. */

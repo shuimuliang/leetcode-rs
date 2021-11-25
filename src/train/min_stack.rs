@@ -32,15 +32,17 @@
 
 use std::cell::RefCell;
 
-struct MinStack {
-    v: RefCell<Vec<i32>>
+#[allow(dead_code)]
+pub struct MinStack {
+    v: RefCell<Vec<i32>>,
 }
 
+#[allow(dead_code)]
 impl MinStack {
     fn new() -> Self {
-       Self {
-          v: RefCell::new(vec![])
-       }
+        Self {
+            v: RefCell::new(vec![])
+        }
     }
 
     fn push(&self, val: i32) {
@@ -60,12 +62,13 @@ impl MinStack {
     }
 }
 
+#[cfg(test)]
 mod tests {
     use super::MinStack;
 
     #[test]
     fn test_case_1() {
-        let min_stack = MinStack::new();
+        let min_stack: MinStack = MinStack::new();
         min_stack.push(-2);
         min_stack.push(0);
         min_stack.push(-3);

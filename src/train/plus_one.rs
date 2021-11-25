@@ -12,7 +12,7 @@
 //     b
 // }
 
-
+#[allow(dead_code)]
 pub fn plus_one(digits: Vec<i32>) -> Vec<i32> {
     let mut v: Vec<i32> = Vec::new();
     let mut next = 1;

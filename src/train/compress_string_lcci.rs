@@ -1,5 +1,6 @@
 // https://leetcode-cn.com/problems/compress-string-lcci/
 
+#[allow(dead_code)]
 pub fn compress_string(s: String) -> String {
     let mut res = String::new();
 

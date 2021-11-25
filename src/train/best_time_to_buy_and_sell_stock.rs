@@ -2,6 +2,7 @@
 
 use std::cmp::{max, min};
 
+#[allow(dead_code)]
 pub fn max_profit(prices: Vec<i32>) -> i32 {
     let mut max_rtn= 0;
     let mut min_price = 0;
