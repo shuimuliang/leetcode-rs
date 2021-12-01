@@ -12,5 +12,4 @@ mod valid_parentheses;
 mod sliding_window_maximum;
 mod valid_anagram;
 mod group_anagrams;
-mod reverse_linked_list2;
 mod borsh_lib;
