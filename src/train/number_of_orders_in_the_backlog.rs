@@ -17,7 +17,7 @@ use std::cmp::Ordering;
 // PartialOrd 要求你的类型实现 PartialEq
 // Ord 要求你的类型实现 PartialOrd 和 Eq（因此 PartialEq 也需要被实现）
 
-#[derive(Debug, Eq, Clone, Copy)]
+#[derive(Eq, Clone, Copy)]
 struct MinOrder {
     price: i32,
     amount: i32,
@@ -41,7 +41,7 @@ impl PartialOrd for MinOrder {
     }
 }
 
-#[derive(Debug, Eq, Clone, Copy)]
+#[derive(Eq, Clone, Copy)]
 struct MaxOrder {
     price: i32,
     amount: i32,
@@ -65,6 +65,7 @@ impl PartialOrd for MaxOrder {
     }
 }
 
+#[allow(dead_code)]
 pub fn get_number_of_backlog_orders(_orders: Vec<Vec<i32>>) -> i32 {
     let mut buy_heap: BinaryHeap<MaxOrder> = BinaryHeap::new();
     let mut sell_heap: BinaryHeap<MinOrder> = BinaryHeap::new();
