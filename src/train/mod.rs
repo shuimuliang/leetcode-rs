@@ -18,3 +18,5 @@ mod the_skyline_problem;
 mod roman_to_integer;
 mod water_bottles;
 mod water_bottles_iterator;
+// mod binary_search_tree_iterator;
+mod add_binary;
