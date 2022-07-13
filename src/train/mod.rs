@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 mod two_sum;
 mod min_stack_lcci;
 mod reverse_linked_list;
@@ -22,5 +24,6 @@ mod binary_search_tree_iterator;
 mod add_binary;
 mod online_stock_span;
 mod complex_number_multiplication;
-// mod same_tree;
+mod same_tree;
+
 
