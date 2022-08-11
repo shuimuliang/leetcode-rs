@@ -39,7 +39,7 @@ fn list_to_vec(head: &Option<Box<ListNode>>) -> Vec<i32> {
 
     // 把旧链表拆下，放到新链表头部
     while list_iter.is_some() {
-        let mut node = list_iter.as_ref();
+        let node = list_iter.as_ref();
         new_vec.push(node.unwrap().val);
         list_iter = &node.unwrap().next;
     }
@@ -57,11 +57,11 @@ impl Solution {
         let mut plus = 0;
 
         while l1_iter.is_some() && l2_iter.is_some() {
-            let mut l1_node : Option<&Box<ListNode>> = l1_iter.as_ref();
+            let l1_node : Option<&Box<ListNode>> = l1_iter.as_ref();
             let v1 = l1_node.unwrap().val;
             l1_iter = &l1_node.unwrap().next;
 
-            let mut l2_node : Option<&Box<ListNode>> = l2_iter.as_ref();
+            let l2_node : Option<&Box<ListNode>> = l2_iter.as_ref();
             let v2 = l2_node.unwrap().val;
             l2_iter = &l2_node.unwrap().next;
 
@@ -71,7 +71,7 @@ impl Solution {
         }
 
         while l1_iter.is_some() {
-            let mut node : Option<&Box<ListNode>> = l1_iter.as_ref();
+            let node : Option<&Box<ListNode>> = l1_iter.as_ref();
             let v = node.unwrap().val;
             l1_iter = &node.unwrap().next;
 
@@ -81,7 +81,7 @@ impl Solution {
         }
 
         while l2_iter.is_some() {
-            let mut node : Option<&Box<ListNode>> = l2_iter.as_ref();
+            let node : Option<&Box<ListNode>> = l2_iter.as_ref();
             let v = node.unwrap().val;
             l2_iter = &node.unwrap().next;
 
