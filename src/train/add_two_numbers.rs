@@ -100,7 +100,7 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    use super::{ListNode, vec_to_list, list_to_vec};
+    use super::{vec_to_list, list_to_vec};
     use super::Solution;
 
     #[test]
