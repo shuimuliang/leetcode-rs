@@ -1,2 +1,3 @@
-mod double_linked_list;
+#![allow(dead_code)]
 
+pub mod double_linked_list;
