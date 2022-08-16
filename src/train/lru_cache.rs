@@ -1,6 +1,24 @@
 /// simple LRU Cache
 /// https://leetcode.com/problems/lru-cache/
 /// Doubly-linked list + hashmap, O(1) complexity
+///
+/// 题目抽象为一个Simple LRU Cache
+/// 使用双链表结构，节点存储key和value，出队规则FIFO:
+/// 如果某个key被get，那么将该key对应的节点移到头部
+/// 如果某个key被put
+/// key存在，则移动key对应的节点，变更value
+/// key不存在，则插入该key和value。队列溢出，将tail节点移除
+/// time complexity = O(n)
+/// space complexity = O(n)
+
+/*
+- Node<K,V>和List<K,V> impl Default Trait. List预创建head和tail节点。
+- List每个节点使用Rc保持对后面节点的强引用，使用Weak保持对前面节点的弱引用，避免循环引用
+- 提供push_front方法，从头部插入最热节点
+- 提供pop_back方法，从尾部移出最冷节点
+- List提供capacity容量，如果超出容量，则pop_back
+- 内存泄漏检查: 补充测试用例，手动drop list
+ */
 
 use std::cell::RefCell;
 use std::rc::{Rc, Weak};
@@ -133,7 +151,7 @@ impl<K: Default + Debug, V: Default + Debug> Drop for List<K, V>
 
 struct LRUCache {
     capacity: usize,
-    map: HashMap<i32, MaybeNextNode<i32, i32>>,
+    map: HashMap<i32, MaybeNextNode<i32, i32>>, // Option<Rc<Refcell<Node<K,v>>>
     list: List<i32, i32>,
 }
 
@@ -177,6 +195,7 @@ impl LRUCache {
             let node = Rc::new(RefCell::new(Node::new(key, value)));
             self.map.insert(key, Some(node.clone()));
             self.list.push_front(node);
+
         }
 
     }
