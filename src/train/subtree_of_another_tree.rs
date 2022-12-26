@@ -117,7 +117,6 @@ impl MerkleTree {
     }
 
     pub fn validate_proof(&self, digest: Digest) -> bool {
-        let hit_proof = false;
         if self.digest == digest {
             return true
         }
@@ -140,8 +139,7 @@ impl MerkleTree {
 }
 
 use std::rc::Rc;
-use std::cell::{Ref, RefCell};
-use std::convert;
+use std::cell::{RefCell};
 use std::io::Write;
 use crate::train::md5::{Digest, compute, Context};
 
