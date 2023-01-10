@@ -4,14 +4,13 @@ use std::collections::HashMap;
 
 #[allow(dead_code)]
 pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
-    let mut value_map:HashMap<i32, Vec<i32>> = HashMap::new();
+    let mut value_map: HashMap<i32, Vec<i32>> = HashMap::new();
 
     for (index, value) in nums.iter().enumerate() {
         let index_vec = value_map.get_mut(&value);
         if let Some(v) = index_vec {
             v.push(index as i32);
-        }
-        else {
+        } else {
             let v = vec![index as i32];
             value_map.insert(*value, v);
         }
@@ -42,14 +41,14 @@ mod tests {
         let nums = vec![2, 7, 11, 15];
         let target = 9;
         let result = two_sum(nums, target);
-        assert_eq!(vec![0,1], result);
+        assert_eq!(vec![0, 1], result);
     }
 
     #[test]
     fn case_2() {
-        let nums = vec![3,3];
+        let nums = vec![3, 3];
         let target = 6;
         let result = two_sum(nums, target);
-        assert_eq!(vec![0,1], result);
+        assert_eq!(vec![0, 1], result);
     }
 }

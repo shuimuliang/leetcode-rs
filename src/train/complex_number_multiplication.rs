@@ -3,7 +3,7 @@ https://leetcode.com/problems/complex-number-multiplication
 https://github.com/rust-num/num-complex
 */
 
-use core::ops::{Mul};
+use core::ops::Mul;
 
 struct Complex {
     /// Real portion of the complex number
@@ -29,8 +29,7 @@ impl Mul<Complex> for Complex {
     }
 }
 
-fn deserialize(s: &str) -> Result<Complex, ()>
-{
+fn deserialize(s: &str) -> Result<Complex, ()> {
     let mut a = s.split('+');
     let re_str = a.next().unwrap();
     let im_str = a.next().unwrap();

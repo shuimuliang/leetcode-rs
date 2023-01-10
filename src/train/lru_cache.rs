@@ -10,7 +10,6 @@
 /// key不存在，则插入该key和value。队列溢出，将tail节点移除
 /// time complexity = O(n)
 /// space complexity = O(n)
-
 /*
 - Node<K,V>和List<K,V> impl Default Trait. List预创建head和tail节点。
 - List每个节点使用Rc保持对后面节点的强引用，使用Weak保持对前面节点的弱引用，避免循环引用
@@ -19,11 +18,10 @@
 - List提供capacity容量，如果超出容量，则pop_back
 - 内存泄漏检查: 补充测试用例，手动drop list
  */
-
 use std::cell::RefCell;
-use std::rc::{Rc, Weak};
-use std::fmt::Debug;
 use std::collections::HashMap;
+use std::fmt::Debug;
+use std::rc::{Rc, Weak};
 
 type MaybePrevNode<K, V> = Option<Weak<RefCell<Node<K, V>>>>;
 type MaybeNextNode<K, V> = Option<Rc<RefCell<Node<K, V>>>>;
@@ -37,7 +35,9 @@ pub struct Node<K: Default + Debug, V: Default + Debug> {
 }
 
 impl<K, V> Default for Node<K, V>
-    where K: Default + Debug, V: Default + Debug
+where
+    K: Default + Debug,
+    V: Default + Debug,
 {
     fn default() -> Self {
         Self {
@@ -50,7 +50,10 @@ impl<K, V> Default for Node<K, V>
 }
 
 impl<K, V> Node<K, V>
-    where K: Default + Debug, V: Default + Debug {
+where
+    K: Default + Debug,
+    V: Default + Debug,
+{
     pub fn new(key: K, val: V) -> Self {
         Self {
             key,
@@ -61,8 +64,7 @@ impl<K, V> Node<K, V>
     }
 }
 
-impl<K: Default + Debug, V: Default + Debug> Drop for Node<K, V>
-{
+impl<K: Default + Debug, V: Default + Debug> Drop for Node<K, V> {
     fn drop(&mut self) {
         // println!("drop node: {:?}", self);
     }
@@ -75,7 +77,9 @@ pub struct List<K: Default + Debug, V: Default + Debug> {
 }
 
 impl<K, V> List<K, V>
-    where K: Default + Debug, V: Default + Debug
+where
+    K: Default + Debug,
+    V: Default + Debug,
 {
     pub fn new(capacity: usize) -> Self {
         let head = Rc::new(RefCell::new(Node::default()));
@@ -100,7 +104,7 @@ impl<K, V> List<K, V>
                 head.borrow_mut().next = Some(node);
                 self.count += 1;
             }
-            None => ()
+            None => (),
         }
     }
 
@@ -116,9 +120,7 @@ impl<K, V> List<K, V>
                 self.count -= 1;
                 Some(node)
             }
-            _ => {
-                None
-            }
+            _ => None,
         }
     }
 
@@ -138,8 +140,7 @@ impl<K, V> List<K, V>
     }
 }
 
-impl<K: Default + Debug, V: Default + Debug> Drop for List<K, V>
-{
+impl<K: Default + Debug, V: Default + Debug> Drop for List<K, V> {
     fn drop(&mut self) {
         while self.count > 1 {
             self.pop_back();
@@ -195,9 +196,7 @@ impl LRUCache {
             let node = Rc::new(RefCell::new(Node::new(key, value)));
             self.map.insert(key, Some(node.clone()));
             self.list.push_front(node);
-
         }
-
     }
 }
 

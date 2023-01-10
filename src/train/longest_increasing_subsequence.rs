@@ -41,10 +41,8 @@ mod tests {
 
     #[test]
     fn case_1() {
-        let input = vec![10,9,2,5,3,7,101,18];
-        let output= length_of_lis(input);
+        let input = vec![10, 9, 2, 5, 3, 7, 101, 18];
+        let output = length_of_lis(input);
         assert_eq!(4, output);
     }
-
 }
-

@@ -1,10 +1,9 @@
 // https://leetcode-cn.com/problems/number-of-orders-in-the-backlog/
 // https://ipotato.me/article/59
 
-/// binary heap 应用T类型
-
-use std::collections::BinaryHeap;
 use std::cmp::Ordering;
+/// binary heap 应用T类型
+use std::collections::BinaryHeap;
 
 // struct 按价格排序
 // 卖单队列, 使用最小堆, 价格低的排前面
@@ -73,11 +72,13 @@ pub fn get_number_of_backlog_orders(_orders: Vec<Vec<i32>>) -> i32 {
     for t in _orders.iter() {
         // println!("{} {} {}", t[0], t[1], t[2]);
 
-
         match t[2] {
             // buy order
             0 => {
-                let mut buy_order = MaxOrder { price: t[0], amount: t[1] };
+                let mut buy_order = MaxOrder {
+                    price: t[0],
+                    amount: t[1],
+                };
 
                 loop {
                     // 从卖单里check
@@ -108,13 +109,19 @@ pub fn get_number_of_backlog_orders(_orders: Vec<Vec<i32>>) -> i32 {
                         else if buy_order.amount < tso.amount {
                             // 消除部分卖单, 买单不进队列
                             sell_heap.pop();
-                            sell_heap.push(MinOrder { price: tso.price, amount: tso.amount - buy_order.amount });
+                            sell_heap.push(MinOrder {
+                                price: tso.price,
+                                amount: tso.amount - buy_order.amount,
+                            });
                             break;
                         }
                         // 买单多
                         else if buy_order.amount > tso.amount {
                             // 匹配不完的买单继续和顶部卖单匹配
-                            buy_order = MaxOrder { price: buy_order.price, amount: buy_order.amount - tso.amount };
+                            buy_order = MaxOrder {
+                                price: buy_order.price,
+                                amount: buy_order.amount - tso.amount,
+                            };
                             sell_heap.pop();
                         }
                     }
@@ -123,7 +130,10 @@ pub fn get_number_of_backlog_orders(_orders: Vec<Vec<i32>>) -> i32 {
 
             // sell order
             1 => {
-                let mut sell_order = MinOrder { price: t[0], amount: t[1] };
+                let mut sell_order = MinOrder {
+                    price: t[0],
+                    amount: t[1],
+                };
 
                 loop {
                     // 从买单里check
@@ -155,13 +165,19 @@ pub fn get_number_of_backlog_orders(_orders: Vec<Vec<i32>>) -> i32 {
                         else if sell_order.amount < tbo.amount {
                             // 消除部分买单, 卖单不进队列
                             buy_heap.pop();
-                            buy_heap.push(MaxOrder { price: tbo.price, amount: tbo.amount - sell_order.amount });
+                            buy_heap.push(MaxOrder {
+                                price: tbo.price,
+                                amount: tbo.amount - sell_order.amount,
+                            });
                             break;
                         }
                         // 卖单多
                         else if sell_order.amount > tbo.amount {
                             // 匹配不完的卖单继续和顶部买单匹配
-                            sell_order = MinOrder { price: sell_order.price, amount: sell_order.amount - tbo.amount };
+                            sell_order = MinOrder {
+                                price: sell_order.price,
+                                amount: sell_order.amount - tbo.amount,
+                            };
                             buy_heap.pop();
                         }
                     }
@@ -169,19 +185,25 @@ pub fn get_number_of_backlog_orders(_orders: Vec<Vec<i32>>) -> i32 {
             } // end of match 1
             _ => {}
         } // end of match case
-        // println!("sell_heap {:?}", sell_heap.clone());
-        // println!("buy_heap {:?}", buy_heap.clone());
+          // println!("sell_heap {:?}", sell_heap.clone());
+          // println!("buy_heap {:?}", buy_heap.clone());
     } // end of for loop
 
-    let left_buy_order_count: i32 = buy_heap.iter().map(|x| x.amount).fold(0, |sum, i| (sum + i) % (1_000_000_000 + 7));
-    let left_sell_order_count: i32 = sell_heap.iter().map(|x| x.amount).fold(0, |sum, i| (sum + i) % (1_000_000_000 + 7));
+    let left_buy_order_count: i32 = buy_heap
+        .iter()
+        .map(|x| x.amount)
+        .fold(0, |sum, i| (sum + i) % (1_000_000_000 + 7));
+    let left_sell_order_count: i32 = sell_heap
+        .iter()
+        .map(|x| x.amount)
+        .fold(0, |sum, i| (sum + i) % (1_000_000_000 + 7));
 
     (left_buy_order_count + left_sell_order_count) % (1_000_000_000 + 7)
 }
 
 #[cfg(test)]
 mod tests {
-    use super::{get_number_of_backlog_orders};
+    use super::get_number_of_backlog_orders;
 
     #[test]
     fn test_case_init() {
@@ -207,21 +229,41 @@ mod tests {
 
     #[test]
     fn test_case_2() {
-        let nums: Vec<Vec<i32>> = vec![vec![10, 5, 0], vec![15, 2, 1], vec![25, 1, 1], vec![30, 4, 0]];
+        let nums: Vec<Vec<i32>> = vec![
+            vec![10, 5, 0],
+            vec![15, 2, 1],
+            vec![25, 1, 1],
+            vec![30, 4, 0],
+        ];
         let result: i32 = get_number_of_backlog_orders(nums);
         assert_eq!(6, result);
     }
 
     #[test]
     fn test_case_3() {
-        let nums: Vec<Vec<i32>> = vec![vec![7, 1000000000, 1], vec![15, 3, 0], vec![5, 999999995, 0], vec![5, 1, 1]];
+        let nums: Vec<Vec<i32>> = vec![
+            vec![7, 1000000000, 1],
+            vec![15, 3, 0],
+            vec![5, 999999995, 0],
+            vec![5, 1, 1],
+        ];
         let result: i32 = get_number_of_backlog_orders(nums);
         assert_eq!(999999984, result);
     }
 
     #[test]
     fn test_case_4() {
-        let nums: Vec<Vec<i32>> = vec![vec![1,29,1], vec![22,7,1], vec![24,1,0], vec![25,15,1], vec![18,8,1], vec![8,22,0], vec![25,15,1], vec![30,1,1], vec![27,30,0]] ;
+        let nums: Vec<Vec<i32>> = vec![
+            vec![1, 29, 1],
+            vec![22, 7, 1],
+            vec![24, 1, 0],
+            vec![25, 15, 1],
+            vec![18, 8, 1],
+            vec![8, 22, 0],
+            vec![25, 15, 1],
+            vec![30, 1, 1],
+            vec![27, 30, 0],
+        ];
         let result: i32 = get_number_of_backlog_orders(nums);
         assert_eq!(22, result);
     }

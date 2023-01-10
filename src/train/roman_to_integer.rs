@@ -9,7 +9,7 @@ fn char_to_int(s: char) -> i32 {
         'C' => 100,
         'D' => 500,
         'M' => 1000,
-        _ => 0
+        _ => 0,
     }
 }
 
@@ -38,7 +38,6 @@ impl Solution {
         sum
     }
 }
-
 
 #[cfg(test)]
 mod tests {

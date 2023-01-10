@@ -15,7 +15,9 @@ pub fn is_valid(s: String) -> bool {
                 v.push(c);
                 true
             }
-            ')' | ']' | '}' if v.last().is_some() && (symbol_map.get(&v.last().unwrap()) == Some(&c)) => {
+            ')' | ']' | '}'
+                if v.last().is_some() && (symbol_map.get(&v.last().unwrap()) == Some(&c)) =>
+            {
                 v.pop();
                 true
             }
@@ -28,10 +30,9 @@ pub fn is_valid(s: String) -> bool {
     v.is_empty()
 }
 
-
 #[cfg(test)]
 mod tests {
-    use super::{is_valid};
+    use super::is_valid;
 
     #[test]
     fn test_case_0() {

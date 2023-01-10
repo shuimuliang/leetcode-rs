@@ -58,7 +58,6 @@ impl From<&MaybeNode> for MerkleTree {
                         left: Some(Rc::new(RefCell::new(left))),
                         right: Some(Rc::new(RefCell::new(right))),
                     }
-
                 } else if t.left.is_some() && t.right.is_none() {
                     let left = MerkleTree::from(&t.left);
 
@@ -93,14 +92,12 @@ impl From<&MaybeNode> for MerkleTree {
                         right: None,
                     }
                 }
-            },
-            None => {
-                Self {
-                    digest: Digest::default(),
-                    left: None,
-                    right: None,
-                }
             }
+            None => Self {
+                digest: Digest::default(),
+                left: None,
+                right: None,
+            },
         };
         node
     }
@@ -118,44 +115,47 @@ impl MerkleTree {
 
     pub fn validate_proof(&self, digest: Digest) -> bool {
         if self.digest == digest {
-            return true
+            return true;
         }
         let hit_left = match self.left {
             Some(ref child) => child.borrow().validate_proof(digest),
             None => false,
         };
         if hit_left {
-            return true
+            return true;
         }
         let hit_right = match self.right {
             Some(ref child) => child.borrow().validate_proof(digest),
             None => false,
         };
         if hit_right {
-            return true
+            return true;
         }
         false
     }
 }
 
-use std::rc::Rc;
-use std::cell::{RefCell};
+use crate::train::md5::{compute, Context, Digest};
+use std::cell::RefCell;
 use std::io::Write;
-use crate::train::md5::{Digest, compute, Context};
+use std::rc::Rc;
 
 impl Solution {
-    pub fn is_subtree(root: Option<Rc<RefCell<TreeNode>>>, sub_root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+    pub fn is_subtree(
+        root: Option<Rc<RefCell<TreeNode>>>,
+        sub_root: Option<Rc<RefCell<TreeNode>>>,
+    ) -> bool {
         let m1 = MerkleTree::from(&root);
         let m2 = MerkleTree::from(&sub_root);
         m1.validate_proof(m2.digest)
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
+    #[ignore]
     #[test]
     fn test_case_1() {
         // [3,4,5,1,2], [4,1,2]

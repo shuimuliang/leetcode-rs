@@ -3,8 +3,8 @@
 // https://course.rs/advance/smart-pointer/box.html smart pointer
 // https://doc.rust-lang.org/std/option/enum.Option.html#method.and
 
-use std::rc::Rc;
 use std::cell::{Cell, RefCell};
+use std::rc::Rc;
 
 type MaybeNode = Option<Rc<RefCell<TreeNode>>>;
 type IterRes = i32;
@@ -34,7 +34,6 @@ struct BSTIterator {
     index: Cell<usize>,
 }
 
-
 /**
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
@@ -59,7 +58,7 @@ impl BSTIterator {
 
     fn next(&self) -> i32 {
         let pos = self.index.get();
-        self.index.set(pos+1);
+        self.index.set(pos + 1);
         self.results[pos]
     }
 
@@ -68,7 +67,6 @@ impl BSTIterator {
     }
 }
 
-
 // Your BSTIterator object will be instantiated and called as such:
 // let obj = BSTIterator::new(root);
 // let ret_1: i32 = obj.next();
@@ -76,10 +74,10 @@ impl BSTIterator {
 
 #[cfg(test)]
 mod tests {
+    use super::BSTIterator;
+    use super::TreeNode;
     use std::cell::RefCell;
     use std::rc::Rc;
-    use super::TreeNode;
-    use super::BSTIterator;
 
     #[test]
     fn case_0() {
@@ -99,21 +97,21 @@ mod tests {
 
         let bst_iterator: BSTIterator = BSTIterator::new(root);
 
-        res = bst_iterator.next();    // return 3
+        res = bst_iterator.next(); // return 3
         assert_eq!(res, 3);
-        res = bst_iterator.next();    // return 7
+        res = bst_iterator.next(); // return 7
         assert_eq!(res, 7);
         has_next = bst_iterator.has_next(); // return True
         assert_eq!(has_next, true);
-        res = bst_iterator.next();    // return 9
+        res = bst_iterator.next(); // return 9
         assert_eq!(res, 9);
         has_next = bst_iterator.has_next(); // return True
         assert_eq!(has_next, true);
-        res = bst_iterator.next();    // return 15
+        res = bst_iterator.next(); // return 15
         assert_eq!(res, 15);
         has_next = bst_iterator.has_next(); // return True
         assert_eq!(has_next, true);
-        res = bst_iterator.next();    // return 20
+        res = bst_iterator.next(); // return 20
         assert_eq!(res, 20);
         has_next = bst_iterator.has_next(); // return False
         assert_eq!(has_next, false);

@@ -19,8 +19,8 @@ impl TreeNode {
 
 struct Solution;
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 type MaybeNode = Option<Rc<RefCell<TreeNode>>>;
 
@@ -29,9 +29,9 @@ impl Solution {
         // iter root node in pre order
         let is_the_same = match (p, q) {
             (Some(v1), Some(v2)) if v1.borrow().val == v2.borrow().val => {
-                Self::is_same_tree(v1.borrow().left.clone(), v2.borrow().left.clone()) &&
-                    Self::is_same_tree(v1.borrow().right.clone(), v2.borrow().right.clone())
-            },
+                Self::is_same_tree(v1.borrow().left.clone(), v2.borrow().left.clone())
+                    && Self::is_same_tree(v1.borrow().right.clone(), v2.borrow().right.clone())
+            }
             (None, None) => true,
             _ => false,
             // (Some(v1), None) => false,
@@ -48,10 +48,10 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
+    use super::Solution;
+    use super::TreeNode;
     use std::cell::RefCell;
     use std::rc::Rc;
-    use super::TreeNode;
-    use super::Solution;
 
     #[test]
     fn case_0() {

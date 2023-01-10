@@ -37,14 +37,22 @@ impl Solution {
         for i in 0..max_len {
             let bit_a = if i < len_a {
                 char_to_int(a.chars().nth(len_a - i - 1).unwrap())
-            } else { 0 };
+            } else {
+                0
+            };
             let bit_b = if i < len_b {
                 char_to_int(b.chars().nth(len_b - i - 1).unwrap())
-            } else { 0 };
+            } else {
+                0
+            };
 
             let bit_sum = bit_a + bit_b + carry;
             sum.push(int_to_char(bit_sum % 2));
-            if bit_sum > 1 { carry = 1; } else { carry = 0; }
+            if bit_sum > 1 {
+                carry = 1;
+            } else {
+                carry = 0;
+            }
         }
         if carry > 0 {
             sum.push('1');

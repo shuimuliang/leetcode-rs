@@ -14,7 +14,6 @@ pub struct MinStack {
  */
 #[allow(dead_code)]
 impl MinStack {
-
     /** initialize your data structure here. */
     fn new() -> Self {
         MinStack {
@@ -27,11 +26,11 @@ impl MinStack {
         let mut sim_stack = self.sim_stack.borrow_mut();
         sim_stack.push(x);
 
-        let mut min_stack =self.min_stack.borrow_mut();
+        let mut min_stack = self.min_stack.borrow_mut();
         let top_value = min_stack.last().cloned();
 
         if let Some(top_v) = top_value {
-            if x < top_v{
+            if x < top_v {
                 min_stack.push(x);
             } else {
                 min_stack.push(top_v);
@@ -42,14 +41,14 @@ impl MinStack {
     }
 
     fn pop(&self) {
-        let mut sim_stack= self.sim_stack.borrow_mut();
+        let mut sim_stack = self.sim_stack.borrow_mut();
         sim_stack.pop();
         let mut min_stack = self.min_stack.borrow_mut();
         min_stack.pop();
     }
 
     fn top(&self) -> i32 {
-        let sim_stack= self.sim_stack.borrow();
+        let sim_stack = self.sim_stack.borrow();
         *sim_stack.last().unwrap()
     }
 
@@ -75,7 +74,6 @@ mod tests {
 
     #[test]
     fn case_1() {
-
         let min_stack = MinStack::new();
         min_stack.push(-2);
         min_stack.push(0);
@@ -89,6 +87,5 @@ mod tests {
 
         let ret_3 = min_stack.get_min();
         assert_eq!(-2, ret_3);
-
     }
 }

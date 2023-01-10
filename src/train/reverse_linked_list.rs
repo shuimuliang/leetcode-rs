@@ -13,10 +13,7 @@ pub struct ListNode {
 impl ListNode {
     #[inline]
     fn new(val: i32) -> Self {
-        ListNode {
-            next: None,
-            val,
-        }
+        ListNode { next: None, val }
     }
 }
 
@@ -38,7 +35,7 @@ pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
 
 #[cfg(test)]
 mod tests {
-    use super::{ListNode, reverse_list};
+    use super::{reverse_list, ListNode};
 
     #[test]
     fn case_1() {
@@ -53,7 +50,7 @@ mod tests {
         l2.next = Some(l3);
         l1.next = Some(l2);
 
-        let head= reverse_list(Some(l1));
+        let head = reverse_list(Some(l1));
         let rev_l1 = head.unwrap();
         assert_eq!(5, rev_l1.val);
         let rev_l2 = rev_l1.next.unwrap();
@@ -68,6 +65,4 @@ mod tests {
         let tail = rev_l5.next;
         assert!(tail.is_none());
     }
-
 }
-

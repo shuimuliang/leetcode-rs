@@ -37,7 +37,6 @@ pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
     return vecs;
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -45,7 +44,14 @@ mod tests {
     #[test]
     #[ignore]
     fn test_case_1() {
-        let a = vec!["eat".to_string(), "tea".to_string(), "tan".to_string(), "ate".to_string(), "nat".to_string(), "bat".to_string()];
+        let a = vec![
+            "eat".to_string(),
+            "tea".to_string(),
+            "tan".to_string(),
+            "ate".to_string(),
+            "nat".to_string(),
+            "bat".to_string(),
+        ];
         let b = vec![vec!["ate", "eat", "tea"], vec!["nat", "tan"], vec!["bat"]];
         let result = group_anagrams(a);
         assert_eq!(b, result);

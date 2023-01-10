@@ -16,14 +16,14 @@ mod tests {
         let mut v = vec![1, 1, 2];
         let len = remove_duplicates(&mut v);
         assert_eq!(2, len);
-        assert_eq!(vec![1,2], v);
+        assert_eq!(vec![1, 2], v);
     }
 
     #[test]
     fn test_case_2() {
-        let mut v = vec![0,0,1,1,1,2,2,3,3,4];
+        let mut v = vec![0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
         let len = remove_duplicates(&mut v);
         assert_eq!(5, len);
-        assert_eq!(vec![0,1,2,3,4], v);
+        assert_eq!(vec![0, 1, 2, 3, 4], v);
     }
 }

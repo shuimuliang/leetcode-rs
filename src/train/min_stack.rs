@@ -41,7 +41,7 @@ pub struct MinStack {
 impl MinStack {
     fn new() -> Self {
         Self {
-            v: RefCell::new(vec![])
+            v: RefCell::new(vec![]),
         }
     }
 
@@ -72,9 +72,9 @@ mod tests {
         min_stack.push(-2);
         min_stack.push(0);
         min_stack.push(-3);
-        assert_eq!(-3, min_stack.get_min());    // --> 返回 -3.
+        assert_eq!(-3, min_stack.get_min()); // --> 返回 -3.
         min_stack.pop();
-        assert_eq!(0, min_stack.top());        // --> 返回 0.
-        assert_eq!(-2, min_stack.get_min());   // --> 返回 -2.
+        assert_eq!(0, min_stack.top()); // --> 返回 0.
+        assert_eq!(-2, min_stack.get_min()); // --> 返回 -2.
     }
 }
