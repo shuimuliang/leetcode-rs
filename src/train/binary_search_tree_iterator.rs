@@ -102,18 +102,18 @@ mod tests {
         res = bst_iterator.next(); // return 7
         assert_eq!(res, 7);
         has_next = bst_iterator.has_next(); // return True
-        assert_eq!(has_next, true);
+        assert!(has_next);
         res = bst_iterator.next(); // return 9
         assert_eq!(res, 9);
         has_next = bst_iterator.has_next(); // return True
-        assert_eq!(has_next, true);
+        assert!(has_next);
         res = bst_iterator.next(); // return 15
         assert_eq!(res, 15);
         has_next = bst_iterator.has_next(); // return True
-        assert_eq!(has_next, true);
+        assert!(has_next);
         res = bst_iterator.next(); // return 20
         assert_eq!(res, 20);
         has_next = bst_iterator.has_next(); // return False
-        assert_eq!(has_next, false);
+        assert!(!has_next);
     }
 }

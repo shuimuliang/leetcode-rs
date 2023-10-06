@@ -40,7 +40,7 @@ impl DB {
 
 #[derive(Debug)]
 enum DBAction {
-    READ,
+    Read,
     Increase(usize),
 }
 
@@ -119,7 +119,7 @@ impl Worker {
             if let Ok(Payload { serial_num, action }) = payload {
                 dbg!(serial_num);
                 match action {
-                    DBAction::READ => {
+                    DBAction::Read => {
                         let counter = db.read().unwrap().read();
                         dbg!(counter);
                     }
@@ -147,7 +147,7 @@ mod tests {
         // send payload
         owner.notify_payload(Payload {
             serial_num: 1,
-            action: DBAction::READ,
+            action: DBAction::Read,
         });
         owner.notify_payload(Payload {
             serial_num: 2,
@@ -155,7 +155,7 @@ mod tests {
         });
         owner.notify_payload(Payload {
             serial_num: 3,
-            action: DBAction::READ,
+            action: DBAction::Read,
         });
 
         sleep(Duration::from_secs(2));

@@ -27,7 +27,7 @@ impl Iterator for WineShop {
 
         // Exchange
         self.num_full_bottles = self.num_empty_bottles / self.num_exchange;
-        self.num_empty_bottles = self.num_empty_bottles % self.num_exchange;
+        self.num_empty_bottles %= self.num_exchange;
 
         Some(drunk_bottles)
     }
@@ -41,8 +41,8 @@ impl Solution {
     pub fn num_water_bottles(num_bottles: i32, num_exchange: i32) -> i32 {
         // Initial
         let mut sum = 0;
-        let mut wineshop = WineShop::new(num_bottles, num_exchange);
-        while let Some(drunk_bottles) = wineshop.next() {
+        let wineshop = WineShop::new(num_bottles, num_exchange);
+        for drunk_bottles in wineshop {
             sum += drunk_bottles;
         }
         sum

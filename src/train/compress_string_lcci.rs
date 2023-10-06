@@ -7,8 +7,7 @@ pub fn compress_string(s: String) -> String {
     let mut curr_char = '@';
     let mut curr_count = 0;
 
-    let mut chars = s.chars();
-    while let Some(t) = chars.next() {
+    for t in s.chars() {
         if curr_char == t {
             curr_count += 1;
         } else {
@@ -24,9 +23,9 @@ pub fn compress_string(s: String) -> String {
     res.push(curr_char);
     res.push_str(&curr_count.to_string());
     if res.len() < s.len() {
-        return res;
+        res
     } else {
-        return s;
+        s
     }
 }
 

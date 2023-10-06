@@ -20,7 +20,7 @@ impl Solution {
                 break;
             }
             left_full_bottles = left_empty_bottles / num_exchange;
-            left_empty_bottles = left_empty_bottles % num_exchange;
+            left_empty_bottles %= num_exchange
         }
 
         sum

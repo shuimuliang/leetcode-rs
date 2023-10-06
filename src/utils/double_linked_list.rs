@@ -99,17 +99,14 @@ where
             self.pop_back();
         }
 
-        match self.head {
-            Some(ref head) => {
-                let mut next = head.borrow_mut().next.take();
-                // next.prev unlink
-                next.as_mut().unwrap().borrow_mut().prev = Some(Rc::downgrade(&node));
-                node.borrow_mut().next = next;
-                node.borrow_mut().prev = Some(Rc::downgrade(head));
-                head.borrow_mut().next = Some(node);
-                self.count += 1;
-            }
-            None => (), // TODO: head not found Err
+        if let Some(ref head) = self.head {
+            let mut next = head.borrow_mut().next.take();
+            // next.prev unlink
+            next.as_mut().unwrap().borrow_mut().prev = Some(Rc::downgrade(&node));
+            node.borrow_mut().next = next;
+            node.borrow_mut().prev = Some(Rc::downgrade(head));
+            head.borrow_mut().next = Some(node);
+            self.count += 1;
         }
     }
 
@@ -127,9 +124,9 @@ where
                 node.borrow_mut().prev = None;
                 node.borrow_mut().next = None;
                 self.count -= 1;
-                return Some(node);
+                Some(node)
             }
-            _ => return None,
+            _ => None,
         }
     }
 
@@ -155,8 +152,10 @@ impl<K: Default + Debug, V: Default + Debug> Drop for List<K, V> {
         while self.count > 1 {
             self.pop_back();
         }
-        drop(&self.head);
-        drop(&self.tail);
+        let _ = self.head;
+        let _ = self.tail;
+        // drop(&self.head);
+        // drop(&self.tail);
     }
 }
 
@@ -244,6 +243,7 @@ mod tests {
             list.push_front(Rc::new(RefCell::new(Node::new(x, x))));
         }
         assert_eq!(1, list.count());
-        drop(&list);
+        let _ = list;
+        // drop(&list);
     }
 }

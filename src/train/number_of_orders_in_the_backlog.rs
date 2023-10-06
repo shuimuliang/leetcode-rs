@@ -36,7 +36,7 @@ impl Ord for MinOrder {
 
 impl PartialOrd for MinOrder {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(other.cmp(&self))
+        Some(other.cmp(self))
     }
 }
 
@@ -60,11 +60,12 @@ impl Ord for MaxOrder {
 
 impl PartialOrd for MaxOrder {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(&other))
+        Some(self.cmp(other))
     }
 }
 
 #[allow(dead_code)]
+#[allow(clippy::comparison_chain)]
 pub fn get_number_of_backlog_orders(_orders: Vec<Vec<i32>>) -> i32 {
     let mut buy_heap: BinaryHeap<MaxOrder> = BinaryHeap::new();
     let mut sell_heap: BinaryHeap<MinOrder> = BinaryHeap::new();

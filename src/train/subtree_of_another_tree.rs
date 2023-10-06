@@ -38,6 +38,7 @@ struct MerkleTree {
     pub right: MaybeMerKleTree,
 }
 
+#[allow(clippy::unused_io_amount)]
 impl From<&MaybeNode> for MerkleTree {
     fn from(root: &MaybeNode) -> Self {
         let node = match root.as_ref() {
@@ -170,8 +171,7 @@ mod tests {
             t2.right = Some(Rc::new(RefCell::new(t5)));
             t1.left = Some(Rc::new(RefCell::new(t2)));
             t1.right = Some(Rc::new(RefCell::new(t3)));
-            let tree = Some(Rc::new(RefCell::new(t1)));
-            tree
+            Some(Rc::new(RefCell::new(t1)))
         }
 
         fn build_sub_root() -> MaybeNode {
@@ -180,14 +180,13 @@ mod tests {
             let t5 = TreeNode::new(2);
             t2.left = Some(Rc::new(RefCell::new(t4)));
             t2.left = Some(Rc::new(RefCell::new(t5)));
-            let tree = Some(Rc::new(RefCell::new(t2)));
-            tree
+            Some(Rc::new(RefCell::new(t2)))
         }
 
         let root = build_root();
         let sub_root = build_sub_root();
 
-        assert_eq!(true, Solution::is_subtree(root, sub_root));
+        assert!(Solution::is_subtree(root, sub_root));
     }
 
     #[test]

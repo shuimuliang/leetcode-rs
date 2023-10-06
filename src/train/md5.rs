@@ -94,6 +94,12 @@ const PADDING: [u8; 64] = [
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 ];
 
+impl Default for Context {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Context {
     /// Create a context for computing a digest.
     #[inline]
@@ -121,6 +127,7 @@ impl Context {
     }
 
     /// Finalize and return the digest.
+    #[allow(clippy::needless_range_loop)]
     pub fn compute(mut self) -> Digest {
         let mut input = [0u32; 16];
         let k = ((self.count[0] >> 3) & 0x3f) as usize;
@@ -180,6 +187,7 @@ pub fn compute<T: AsRef<[u8]>>(data: T) -> Digest {
     context.compute()
 }
 
+#[allow(clippy::needless_range_loop)]
 fn consume(
     Context {
         buffer,
@@ -420,10 +428,9 @@ mod tests {
     #[cfg(target_pointer_width = "64")]
     fn test_okverflow_length() {
         use std::io::prelude::Write;
-        use std::u32::MAX;
-        let data = vec![0; MAX as usize + 1];
+        let data = vec![0; u32::MAX as usize + 1];
         let mut context = Context::new();
-        context.write(&data).unwrap();
+        let _ = context.write(&data).unwrap();
         assert_eq!(
             format!("{:x}", context.compute()),
             "c9a5a6878d97b48cc965c1e41859f034"

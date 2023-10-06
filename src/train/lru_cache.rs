@@ -95,16 +95,13 @@ where
     }
 
     pub fn push_front(&mut self, node: Rc<RefCell<Node<K, V>>>) {
-        match self.head {
-            Some(ref head) => {
-                let mut next = head.borrow_mut().next.take();
-                next.as_mut().unwrap().borrow_mut().prev = Some(Rc::downgrade(&node));
-                node.borrow_mut().next = next;
-                node.borrow_mut().prev = Some(Rc::downgrade(head));
-                head.borrow_mut().next = Some(node);
-                self.count += 1;
-            }
-            None => (),
+        if let Some(ref head) = self.head {
+            let mut next = head.borrow_mut().next.take();
+            next.as_mut().unwrap().borrow_mut().prev = Some(Rc::downgrade(&node));
+            node.borrow_mut().next = next;
+            node.borrow_mut().prev = Some(Rc::downgrade(head));
+            head.borrow_mut().next = Some(node);
+            self.count += 1;
         }
     }
 
@@ -145,8 +142,10 @@ impl<K: Default + Debug, V: Default + Debug> Drop for List<K, V> {
         while self.count > 1 {
             self.pop_back();
         }
-        drop(&self.head);
-        drop(&self.tail);
+        let _ = self.head;
+        let _ = self.tail;
+        // drop(&self.head);
+        // drop(&self.tail);
     }
 }
 

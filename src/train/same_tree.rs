@@ -70,7 +70,7 @@ mod tests {
         let root2 = Some(Rc::new(RefCell::new(t2_node_1)));
 
         let be_same_tree = Solution::is_same_tree(root1, root2);
-        assert_eq!(true, be_same_tree);
+        assert!(be_same_tree);
     }
 
     #[test]
@@ -90,6 +90,6 @@ mod tests {
         let root2 = Some(Rc::new(RefCell::new(t2_node_1)));
 
         let be_same_tree = Solution::is_same_tree(root1, root2);
-        assert_eq!(false, be_same_tree);
+        assert!(!be_same_tree);
     }
 }

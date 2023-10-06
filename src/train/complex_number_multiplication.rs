@@ -51,8 +51,7 @@ impl Solution {
         let num1_c: Complex = deserialize(&num1).unwrap();
         let num2_c: Complex = deserialize(&num2).unwrap();
         let num3_c = num1_c * num2_c;
-        let res = serialize(&num3_c);
-        res
+        serialize(&num3_c)
     }
 }
 

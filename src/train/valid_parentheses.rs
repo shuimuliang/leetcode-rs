@@ -8,15 +8,15 @@ pub fn is_valid(s: String) -> bool {
     let symbol_map: HashMap<char, char> = symbol_tuples.into_iter().collect();
 
     let mut v = vec![];
-    let mut iter = s.chars();
-    while let Some(c) = iter.next() {
+    let iter = s.chars();
+    for c in iter {
         let _is_continue = match c {
             '(' | '{' | '[' => {
                 v.push(c);
                 true
             }
             ')' | ']' | '}'
-                if v.last().is_some() && (symbol_map.get(&v.last().unwrap()) == Some(&c)) =>
+                if v.last().is_some() && (symbol_map.get(v.last().unwrap()) == Some(&c)) =>
             {
                 v.pop();
                 true
@@ -27,6 +27,7 @@ pub fn is_valid(s: String) -> bool {
             return false;
         }
     }
+
     v.is_empty()
 }
 
@@ -38,34 +39,34 @@ mod tests {
     fn test_case_0() {
         let s = "()[]{}".to_string();
         let v = is_valid(s);
-        assert_eq!(true, v);
+        assert!(v);
     }
 
     #[test]
     fn test_case_1() {
         let s = "(]".to_string();
         let v = is_valid(s);
-        assert_eq!(false, v);
+        assert!(!v);
     }
 
     #[test]
     fn test_case_3() {
         let s = "([)]".to_string();
         let v = is_valid(s);
-        assert_eq!(false, v);
+        assert!(!v);
     }
 
     #[test]
     fn test_case_4() {
         let s = "{[]}".to_string();
         let v = is_valid(s);
-        assert_eq!(true, v);
+        assert!(v);
     }
 
     #[test]
     fn test_case_5() {
         let s = "]".to_string();
         let v = is_valid(s);
-        assert_eq!(false, v);
+        assert!(!v);
     }
 }

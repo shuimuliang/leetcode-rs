@@ -7,7 +7,7 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
     let mut value_map: HashMap<i32, Vec<i32>> = HashMap::new();
 
     for (index, value) in nums.iter().enumerate() {
-        let index_vec = value_map.get_mut(&value);
+        let index_vec = value_map.get_mut(value);
         if let Some(v) = index_vec {
             v.push(index as i32);
         } else {
@@ -17,7 +17,7 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
     }
 
     for (index, value) in nums.iter().enumerate() {
-        let left = target - (*value as i32);
+        let left = target - (*value);
         if let Some(v) = value_map.get(&left) {
             for i in v {
                 if (index as i32) != *i {

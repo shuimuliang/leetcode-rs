@@ -5,10 +5,10 @@ pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
     let mut vecs: Vec<Vec<String>> = Vec::new();
     let mut map: HashMap<String, Vec<String>> = HashMap::new();
 
-    for i in 0..strs.len() {
+    for i in strs {
         // 将字符串转换为字符数组并对其按字母顺序排序
         let mut chars = vec![];
-        for c in strs[i].chars() {
+        for c in i.chars() {
             chars.push(c);
         }
         chars.sort();
@@ -18,14 +18,15 @@ pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
 
         // 以字母有序的字符串为键在HashMap中进行查找
         let value = map.get(&key);
-        if value != None {
+
+        if let Some(s) = value {
             // 找到对应值（字符串动态数组），将原始字符串压入并更新HashMap的键-值对
-            let mut v = value.unwrap().to_vec();
-            v.push(strs[i].clone());
+            let mut v = s.to_vec();
+            v.push(i.clone());
             map.insert(key, v);
         } else {
             // 未找到对应值，创建以原始字符串初始化的动态数组，并组成键-值对插入HashMap
-            let v = vec![strs[i].clone()];
+            let v = vec![i.clone()];
             map.insert(key, v);
         }
     }
@@ -34,7 +35,7 @@ pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
         vecs.push(val.to_vec());
     }
 
-    return vecs;
+    vecs
 }
 
 #[cfg(test)]

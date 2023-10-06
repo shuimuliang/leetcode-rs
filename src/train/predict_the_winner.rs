@@ -61,13 +61,13 @@ mod tests {
     fn test_case_1() {
         let nums = vec![1, 5, 2];
         let first_win = Solution::predict_the_winner(nums);
-        assert_eq!(first_win, false);
+        assert!(!first_win);
     }
 
     #[test]
     fn test_case_2() {
         let nums = vec![1, 5, 233, 7];
         let first_win = Solution::predict_the_winner(nums);
-        assert_eq!(first_win, true);
+        assert!(first_win);
     }
 }

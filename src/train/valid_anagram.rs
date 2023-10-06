@@ -21,7 +21,7 @@ mod tests {
         let s = "anagram".to_string();
         let t = "nagaram".to_string();
         let result = is_anagram(s, t);
-        assert_eq!(true, result);
+        assert!(result);
     }
 
     #[test]
@@ -29,6 +29,6 @@ mod tests {
         let s = "rat".to_string();
         let t = "car".to_string();
         let result = is_anagram(s, t);
-        assert_eq!(false, result);
+        assert!(!result);
     }
 }
